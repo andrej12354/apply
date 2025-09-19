@@ -224,45 +224,66 @@
 
     const webhookURL = "https://discord.com/api/webhooks/1418627855499399258/7besQvRsNHoQEwoy27HG5z6f0_bHdotUPbjGN0HBnKTs6c0Na9bF9-cOfHG0SuKnbBsH";
 
-    // Staff Form
     document.getElementById('staffForm').addEventListener('submit', async e => {
-        e.preventDefault();
-        const name = document.getElementById('staffName').value;
-        const role = document.getElementById('staffRole').value;
-        const why = document.getElementById('staffWhy').value;
-        const exp = document.getElementById('staffExperience').value || "N/A";
+      e.preventDefault();
+      const name = document.getElementById('staffName').value;
+      const role = document.getElementById('staffRole').value;
+      const why = document.getElementById('staffWhy').value;
+      const exp = document.getElementById('staffExperience').value;
 
-        const message = `------------\n**Staff Application**\nMinecraft Username: ${name}\nRole: ${role}\nWhy Accepted: ${why}\nPrevious Experience: ${exp}\n------------`;
+      const embed = {
+        embeds: [{
+          title: "Staff Application",
+          color: 0xff7f27,
+          fields: [
+            { name: "Minecraft Username", value: name, inline: true },
+            { name: "Role", value: role, inline: true },
+            { name: "Why Accepted?", value: why, inline: false },
+            { name: "Previous Experience", value: exp || "N/A", inline: false }
+          ],
+          timestamp: new Date()
+        }]
+      };
 
-        await fetch(webhookURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ content: message })
-        });
+      await fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(embed)
+      });
 
-        document.getElementById('staffForm').reset();
-        document.getElementById('staffForm').style.display = 'none';
-        document.getElementById('staffSuccess').style.display = 'block';
+      document.getElementById('staffForm').reset();
+      document.getElementById('staffForm').style.display = 'none';
+      document.getElementById('staffSuccess').style.display = 'block';
     });
 
-    // Media Form
     document.getElementById('mediaForm').addEventListener('submit', async e => {
-        e.preventDefault();
-        const name = document.getElementById('mediaName').value;
-        const videos = document.getElementById('mediaContent').value;
-        const why = document.getElementById('mediaWhy').value;
+      e.preventDefault();
+      const name = document.getElementById('mediaName').value;
+      const videos = document.getElementById('mediaContent').value;
+      const why = document.getElementById('mediaWhy').value;
 
-        const message = `------------\n**Media Application**\nMinecraft Username: ${name}\nVideo Links: ${videos}\nWhy Accepted: ${why}\n------------`;
+      const embed = {
+        embeds: [{
+          title: "Media Application",
+          color: 0xff7f27,
+          fields: [
+            { name: "Minecraft Username", value: name, inline: true },
+            { name: "Video Links", value: videos, inline: false },
+            { name: "Why Accepted?", value: why, inline: false }
+          ],
+          timestamp: new Date()
+        }]
+      };
 
-        await fetch(webhookURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ content: message })
-        });
+      await fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(embed)
+      });
 
-        document.getElementById('mediaForm').reset();
-        document.getElementById('mediaForm').style.display = 'none';
-        document.getElementById('mediaSuccess').style.display = 'block';
+      document.getElementById('mediaForm').reset();
+      document.getElementById('mediaForm').style.display = 'none';
+      document.getElementById('mediaSuccess').style.display = 'block';
     });
   </script>
 </body>
