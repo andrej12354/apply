@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MineDime Network - Apply</title>
+  <meta name="description" content="Apply to become a staff member or media team member at MineDime Network!">
+  <meta name="keywords" content="Minecraft, MineDime, Staff Application, Media Application, Apply">
+  <meta name="author" content="MineDime Network">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://i.pinimg.com/736x/df/8e/e7/df8ee7a1e5c723e18927aee30b3f46e2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #fff;
+      background: #ff7f27;
+      padding: 10px 20px;
+      margin: 0 5px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    nav a:hover { background: #e66910; }
+
+    .hamburger { display: none; position: absolute; right: 20px; top: 15px; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger div { width: 25px; height: 3px; background: white; }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      transition: right 0.3s ease-in-out;
+      z-index: 200;
+    }
+    .mobile-menu a {
+      color: white;
+      background: #ff7f27;
+      padding: 10px 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      width: 80%;
+      text-align: center;
+    }
+    .close-btn { position: absolute; left: 10px; top: 10px; background: red; color: white; border: none; font-size: 20px; font-weight: bold; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    header {
+      background: rgba(0,0,0,0.85);
+      padding: 40px 20px 20px;
+      border-bottom: 3px solid #ff7f27;
+    }
+    header img { max-width: 150px; margin-bottom: 10px; }
+    h1 { font-size: 3em; color: #ff7f27; margin: 0; }
+
+    .ip-box {
+      background: rgba(0,0,0,0.75);
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 20px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      border: 2px solid #ff7f27;
+      cursor: pointer;
+    }
+
+    section {
+      background: rgba(0,0,0,0.7);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    h2 { color: #ff7f27; }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+
+    button {
+      background: #ff7f27;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #e66910; }
+
+    footer {
+      background: rgba(0,0,0,0.85);
+      padding: 10px;
+      margin-top: 30px;
+      font-size: 0.9em;
+      text-align: center;
+    }
+
+    .tab-buttons { text-align: center; margin-bottom: 20px; }
+    .tab-buttons button { margin: 0 5px; }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="hamburger" onclick="openMenu()"><div></div><div></div><div></div></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="closeMenu()">X</button>
+    <a href="index.html">Home</a>
+    <a href="https://store.minedime.org">Store</a>
+    <a href="https://discord.gg/JqrTxrPwDR">Discord</a>
+    <a href="vote.html">Vote</a>
+    <a href="rules.html">Rules</a>
+    <a href="news.html">News</a>
+    <a href="apply.html">Apply</a>
+  </div>
+
+  <header>
+    <img src="logo.png" alt="MineDime Logo">
+    <h1>Apply to MineDime</h1>
+    <div class="ip-box" onclick="copyIP()"><strong>Server IP:</strong> <span id="server-ip">play.minedime.org</span></div>
+    <p>Click the IP to copy!</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="https://store.minedime.org">Store</a>
+    <a href="https://discord.gg/JqrTxrPwDR">Discord</a>
+    <a href="vote.html">Vote</a>
+    <a href="rules.html">Rules</a>
+    <a href="news.html">News</a>
+    <a href="apply.html">Apply</a>
+  </nav>
+
+  <main>
+    <div class="tab-buttons">
+      <button onclick="showTab('staff')">Staff Application</button>
+      <button onclick="showTab('media')">Media Application</button>
+    </div>
+
+    <!-- STAFF APPLICATION FORM -->
+    <section id="staff" class="tab">
+      <h2>Staff Application</h2>
+      <form>
+        <label for="staff-name">Full Name / Minecraft Name</label>
+        <input type="text" id="staff-name" required>
+
+        <label for="staff-age">Age</label>
+        <input type="number" id="staff-age" required>
+
+        <label for="staff-role">Role Applying For</label>
+        <select id="staff-role" required>
+          <option value="">Select Role</option>
+          <option value="builder">Builder</option>
+          <option value="moderator">Moderator</option>
+          <option value="marketing">Marketing Manager</option>
+          <option value="admin">Admin</option>
+          <option value="headadmin">Head Admin</option>
+        </select>
+
+        <label for="staff-experience">Experience / Previous Roles</label>
+        <textarea id="staff-experience" placeholder="Explain your previous experience or why you are fit for this role..." required></textarea>
+
+        <label for="staff-availability">Availability (Hours per week)</label>
+        <input type="text" id="staff-availability" required>
+
+        <button type="submit">Submit Staff Application</button>
+      </form>
+    </section>
+
+    <!-- MEDIA APPLICATION FORM -->
+    <section id="media" class="tab hidden">
+      <h2>Media Application</h2>
+      <form>
+        <label for="media-name">Full Name / Minecraft Name</label>
+        <input type="text" id="media-name" required>
+
+        <label for="media-age">Age</label>
+        <input type="number" id="media-age" required>
+
+        <label for="media-platform">Platform (YouTube, TikTok, etc.)</label>
+        <input type="text" id="media-platform" required>
+
+        <label for="media-links">Video Links (3 Videos Required)</label>
+        <textarea id="media-links" placeholder="Provide 3 video links (Shorts 500+ views, Videos 100+ views)" required></textarea>
+
+        <label for="media-experience">Experience / Why You Are Fit for Media Role</label>
+        <textarea id="media-experience" required></textarea>
+
+        <button type="submit">Submit Media Application</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MineDime Network. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function openMenu() { document.getElementById('mobileMenu').style.right = '0'; }
+    function closeMenu() { document.getElementById('mobileMenu').style.right = '-250px'; }
+    function copyIP() {
+      const ip = document.getElementById('server-ip').innerText;
+      navigator.clipboard.writeText(ip).then(() => { alert('IP copied to clipboard: ' + ip); });
+    }
+
+    function showTab(tab) {
+      document.getElementById('staff').classList.add('hidden');
+      document.getElementById('media').classList.add('hidden');
+      document.getElementById(tab).classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
