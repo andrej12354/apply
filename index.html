@@ -35,7 +35,6 @@
       font-weight: bold;
       transition: background 0.3s;
     }
-
     nav a:hover { background: #e66910; }
 
     .hamburger {
@@ -47,12 +46,7 @@
       flex-direction: column;
       gap: 5px;
     }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-    }
+    .hamburger div { width: 25px; height: 3px; background: white; }
 
     .mobile-menu {
       position: fixed;
@@ -105,7 +99,6 @@
       padding: 40px 20px 20px;
       border-bottom: 3px solid #ff7f27;
     }
-
     header img { max-width: 150px; margin-bottom: 10px; }
     h1 { font-size: 3em; color: #ff7f27; margin: 0; }
 
@@ -121,18 +114,53 @@
     }
 
     main { max-width: 800px; margin: 0 auto; }
-    section { background: rgba(0,0,0,0.7); margin: 20px auto; padding: 20px; border-radius: 10px; text-align: left; }
+    section {
+      background: rgba(0,0,0,0.7);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+    }
     h2 { color: #ff7f27; }
     label { display: block; margin-top: 10px; font-weight: bold; }
-    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ff7f27; background: rgba(0,0,0,0.5); color: #fff; }
-    button { margin-top: 15px; padding: 10px 20px; background: #ff7f27; border: none; border-radius: 5px; color: #fff; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ff7f27;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #ff7f27;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
     button:hover { background: #e66910; }
-    .success { display: none; background: green; padding: 15px; border-radius: 10px; margin-top: 20px; text-align: center; }
+    .success {
+      display: none;
+      background: green;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <div class="hamburger" onclick="openMenu()"><div></div><div></div><div></div></div>
 
+  <div class="hamburger" onclick="openMenu()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="close-btn" onclick="closeMenu()">X</button>
     <a href="https://www.minedime.org">Home</a>
@@ -150,6 +178,7 @@
     <p>Version: 1.21+</p>
   </header>
 
+  <!-- Main Navigation -->
   <nav>
     <a href="https://www.minedime.org">Home</a>
     <a href="https://store.minedime.org">Store</a>
@@ -217,74 +246,24 @@
   <script>
     function openMenu() { document.getElementById('mobileMenu').style.right = '0'; }
     function closeMenu() { document.getElementById('mobileMenu').style.right = '-250px'; }
+
     function copyIP() {
       const ip = document.getElementById('server-ip').innerText;
       navigator.clipboard.writeText(ip).then(() => { alert('IP copied to clipboard: ' + ip); });
     }
 
-    const webhookURL = "https://discord.com/api/webhooks/1418627855499399258/7besQvRsNHoQEwoy27HG5z6f0_bHdotUPbjGN0HBnKTs6c0Na9bF9-cOfHG0SuKnbBsH";
+    const webhookURL = "https://discord.com/api/webhooks/1418627855499399258/7besQvRsNHoQEwoy27BG5z6f0_bHdotUPbjGN0HBnKTs6c0Na9bF9-cOfHG0SuKnbBsH";
 
-    document.getElementById('staffForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const name = document.getElementById('staffName').value;
-      const role = document.getElementById('staffRole').value;
-      const why = document.getElementById('staffWhy').value;
-      const exp = document.getElementById('staffExperience').value;
-
-      const embed = {
-        embeds: [{
-          title: "Staff Application",
-          color: 0xff7f27,
-          fields: [
-            { name: "Minecraft Username", value: name, inline: true },
-            { name: "Role", value: role, inline: true },
-            { name: "Why Accepted?", value: why, inline: false },
-            { name: "Previous Experience", value: exp || "N/A", inline: false }
-          ],
-          timestamp: new Date()
-        }]
-      };
-
+    // Function to send application as plain text with separators
+    async function sendApplication(title, fields) {
+      const content = `------------\n📌 ${title}\n` +
+        fields.map(f => `**${f.name}:**\n${f.value}`).join('\n') +
+        `\n------------`;
       await fetch(webhookURL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(embed)
+        body: JSON.stringify({ content })
       });
+    }
 
-      document.getElementById('staffForm').reset();
-      document.getElementById('staffForm').style.display = 'none';
-      document.getElementById('staffSuccess').style.display = 'block';
-    });
-
-    document.getElementById('mediaForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const name = document.getElementById('mediaName').value;
-      const videos = document.getElementById('mediaContent').value;
-      const why = document.getElementById('mediaWhy').value;
-
-      const embed = {
-        embeds: [{
-          title: "Media Application",
-          color: 0xff7f27,
-          fields: [
-            { name: "Minecraft Username", value: name, inline: true },
-            { name: "Video Links", value: videos, inline: false },
-            { name: "Why Accepted?", value: why, inline: false }
-          ],
-          timestamp: new Date()
-        }]
-      };
-
-      await fetch(webhookURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(embed)
-      });
-
-      document.getElementById('mediaForm').reset();
-      document.getElementById('mediaForm').style.display = 'none';
-      document.getElementById('mediaSuccess').style.display = 'block';
-    });
-  </script>
-</body>
-</html>
+    document.getElementById('
