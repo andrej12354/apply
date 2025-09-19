@@ -266,4 +266,41 @@
       });
     }
 
-    document.getElementById('
+    document.getElementById('staffForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = document.getElementById('staffName').value;
+      const role = document.getElementById('staffRole').value;
+      const why = document.getElementById('staffWhy').value;
+      const exp = document.getElementById('staffExperience').value || "N/A";
+
+      await sendApplication("Staff Application", [
+        { name: "Username", value: name },
+        { name: "Role", value: role },
+        { name: "Why", value: why },
+        { name: "Experience", value: exp }
+      ]);
+
+      document.getElementById('staffForm').reset();
+      document.getElementById('staffForm').style.display = 'none';
+      document.getElementById('staffSuccess').style.display = 'block';
+    });
+
+    document.getElementById('mediaForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = document.getElementById('mediaName').value;
+      const contentLinks = document.getElementById('mediaContent').value;
+      const why = document.getElementById('mediaWhy').value;
+
+      await sendApplication("Media Application", [
+        { name: "Username", value: name },
+        { name: "Video Links", value: contentLinks },
+        { name: "Why", value: why }
+      ]);
+
+      document.getElementById('mediaForm').reset();
+      document.getElementById('mediaForm').style.display = 'none';
+      document.getElementById('mediaSuccess').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
