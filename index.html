@@ -201,6 +201,9 @@
         <label for="staffName">Minecraft Username</label>
         <input type="text" id="staffName" required>
 
+        <label for="staffDiscord">Discord Username</label>
+        <input type="text" id="staffDiscord" placeholder="Example: User#1234" required>
+
         <label for="staffRole">Role Applying For</label>
         <select id="staffRole" required>
           <option>Builder</option>
@@ -227,6 +230,9 @@
         <label for="mediaName">Minecraft Username</label>
         <input type="text" id="mediaName" required>
 
+        <label for="mediaDiscord">Discord Username</label>
+        <input type="text" id="mediaDiscord" placeholder="Example: User#1234" required>
+
         <label for="mediaContent">Links to 3 videos (YouTube Shorts ≥500 views, Videos ≥100 views)</label>
         <textarea id="mediaContent" rows="4" placeholder="Paste all 3 links separated by commas" required></textarea>
 
@@ -252,9 +258,8 @@
       navigator.clipboard.writeText(ip).then(() => { alert('IP copied to clipboard: ' + ip); });
     }
 
-    const webhookURL = "https://discord.com/api/webhooks/1418627855499399258/7besQvRsNHoQEwoy27BG5z6f0_bHdotUPbjGN0HBnKTs6c0Na9bF9-cOfHG0SuKnbBsH";
+    const webhookURL = "YOUR_WEBHOOK_HERE";
 
-    // Function to send application as plain text with separators
     async function sendApplication(title, fields) {
       const content = `------------\n📌 ${title}\n` +
         fields.map(f => `**${f.name}:**\n${f.value}`).join('\n') +
@@ -269,12 +274,14 @@
     document.getElementById('staffForm').addEventListener('submit', async e => {
       e.preventDefault();
       const name = document.getElementById('staffName').value;
+      const discord = document.getElementById('staffDiscord').value;
       const role = document.getElementById('staffRole').value;
       const why = document.getElementById('staffWhy').value;
       const exp = document.getElementById('staffExperience').value || "N/A";
 
       await sendApplication("Staff Application", [
         { name: "Username", value: name },
+        { name: "Discord", value: discord },
         { name: "Role", value: role },
         { name: "Why", value: why },
         { name: "Experience", value: exp }
@@ -288,11 +295,13 @@
     document.getElementById('mediaForm').addEventListener('submit', async e => {
       e.preventDefault();
       const name = document.getElementById('mediaName').value;
+      const discord = document.getElementById('mediaDiscord').value;
       const contentLinks = document.getElementById('mediaContent').value;
       const why = document.getElementById('mediaWhy').value;
 
       await sendApplication("Media Application", [
         { name: "Username", value: name },
+        { name: "Discord", value: discord },
         { name: "Video Links", value: contentLinks },
         { name: "Why", value: why }
       ]);
